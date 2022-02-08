@@ -6,9 +6,9 @@ from multipage import MultiPage
 from pages import (
     main_page,
     general_information,
-    #chatbot,
-    #bag_of_words,
-    #own_chatbot,
+    chatbot,
+    bag_of_words,
+    own_chatbot,
     chatbot_comparison
 )  # import your pages here
 
@@ -29,9 +29,9 @@ st.markdown("## ChaBoDoc")
 # Add all your application here
 app.add_page("Startseite", main_page.app)
 app.add_page("Informationen", general_information.app)
-#app.add_page("ChatBot", chatbot.app)
-#app.add_page("Bag of Words", bag_of_words.app)
-#app.add_page("Eigener ChatBot", own_chatbot.app)
+app.add_page("ChatBot", chatbot.app)
+app.add_page("Bag of Words", bag_of_words.app)
+app.add_page("Eigener ChatBot", own_chatbot.app)
 app.add_page("Gruppenchatbots", chatbot_comparison.app)
 
 # The main app

@@ -1,0 +1,221 @@
+\documentclass{article}
+
+
+% if you need to pass options to natbib, use, e.g.:
+%     \PassOptionsToPackage{numbers, compress}{natbib}
+% before loading svrhm_2022
+
+
+% ready for submission
+\usepackage{svrhm_2022}
+
+
+% to compile a preprint version, e.g., for submission to arXiv, add add the
+% [preprint] option:
+%     \usepackage[preprint]{svrhm_2022}
+
+
+% to compile a camera-ready version, add the [final] option, e.g.:
+%     \usepackage[final]{svrhm_2022}
+
+
+% to avoid loading the natbib package, add option nonatbib:
+%    \usepackage[nonatbib]{svrhm_2022}
+
+
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{graphicx}
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{amssymb,amsmath,array}
+
+\title{Population Coding Can Greatly Improve Performance of Neural Networks: A Comparison}
+
+
+% The \author macro works with any number of authors. There are two commands
+% used to separate the names and addresses of multiple authors: \And and \AND.
+%
+% Using \And between authors leaves it to LaTeX to determine where to break the
+% lines. Using \AND forces a line break at that point. So, if LaTeX puts 3 of 4
+% authors names on the first line, and the last on the second line, try using
+% \AND instead of \And before the third author name.
+
+\author{%
+Rebecca K\"ohler\\
+Institut für Neuro- und Bioinformatik\\
+Universität zu Lübeck\\
+Lübeck, 23562 \\
+\texttt{rebecca.koehler@student.uni-luebeck.de} \\
+% examples of more authors
+\And
+Hans-Oliver Hansen\thanks{Equal contributions} \\
+Institut für Neuro- und Bioinformatik\\
+Universität zu Lübeck\\
+Lübeck, 23562 \\
+\texttt{hohansen@inb.uni-luebeck.de} \\
+% examples of more authors
+\And
+Marius Jahrens$^*$ \\
+Institut für Neuro- und Bioinformatik\\
+Universität zu Lübeck\\
+Lübeck, 23562 \\
+\texttt{jahrens@inb.uni-luebeck.de} \\
+% examples of more authors
+\And
+Thomas Martinetz \\
+Institut für Neuro- und Bioinformatik\\
+Universität zu Lübeck\\
+Lübeck, 23562 \\
+\texttt{martinetz@inb.uni-luebeck.de} \\
+% examples of more authors
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \AND
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+  % \And
+  % Coauthor \\
+  % Affiliation \\
+  % Address \\
+  % \texttt{email} \\
+}
+
+
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+  \input{./Sections/abstract.tex}
+\end{abstract}
+
+
+\input{./Sections/introduction.tex}
+\input{./Sections/related_work.tex}
+\input{./Sections/population_coding.tex}
+\input{./Sections/experiments.tex}
+\input{./Sections/results.tex}
+\input{./Sections/conclusion.tex}
+
+\bibliographystyle{svrhm_2022}
+\bibliography{my_bibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\appendix
+
+
+\section{Appendix}
+
+\subsection{Plots}
+\label{subsecPlots}
+Figure \ref{Plots} shows visualizations of the four coding schemes. Figure \ref{PlotPE} shows Positional Encoding for $L=2$. Figure \ref{PlotFE} shows four sine and cosine waves with random parameters for \textbf{b}. Tent encoding in figure \ref{PlotTE} uses parameters $m=1$ and $L=5$. The gaussian curves in figure \ref{PlotME} are created with parameters $\sigma=0.2$ and $L=5$.
+\begin{figure}[!h]
+  \begin{subfigure}{.5\textwidth}
+  \includegraphics[width=\textwidth]{Bilder/plot_positional.png}
+  \caption{Positional Encoding}
+  \label{PlotPE}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \includegraphics[width=\textwidth]{Bilder/plot_fourier.png}
+  \caption{Fourier Feature Mapping}
+  \label{PlotFE}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \includegraphics[width=\textwidth]{Bilder/plot_tent.png}
+  \caption{Tent Encoding}
+  \label{PlotTE}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+  \includegraphics[width=\textwidth]{Bilder/plot_magnitude_varianz.png}
+  \caption{Magnitude Encoding}
+  \label{PlotME}
+\end{subfigure}
+\caption{Visualization of the four coding schemes.}
+\label{Plots}
+\end{figure}
+
+\subsection{Local MSE-Loss}
+\label{LocalMSE}
+To localize the contribution to the overall reconstruction loss the mean squared error is calculated over a sliding $10\times10$-window on a single channel. The resulting loss map is shown in figure \ref{MSE256}.
+% \begin{figure}
+%   \begin{subfigure}{.25\textwidth}
+%     \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_positional_16_0.003_m0_G.eps}
+%     \caption{PE}
+%     \label{MSE16PE}
+%   \end{subfigure}\hfil
+%   \begin{subfigure}{.25\textwidth}
+%     \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_fourier_16_0.01_G.eps}
+%     \caption{FFM}
+%     \label{MSE16FFM}
+%   \end{subfigure}\hfil
+%   \begin{subfigure}{.25\textwidth}
+%     \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_tent16_m4_0.00667_G.eps}
+%     \caption{TE}
+%     \label{MSE16TE}
+%   \end{subfigure}\hfil
+%   \begin{subfigure}{.25\textwidth}
+%     \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_magnitude_16_0.007_m0.05_G.eps}
+%     \caption{ME}
+%     \label{MSE16ME}
+%   \end{subfigure}\hfill
+%   \caption{Local MSE-Loss for $d=16$, green channel, brighter colors represent larger values}
+%   \label{MSE16}
+% \end{figure}
+
+All of the encoding approaches lead to better image reconstruction than no enconding at all. The image background exhibits a higher loss than objects in the foreground. This may be attributed to the background features having higher entropy, i.e. higher information content. 
+
+\begin{figure}[!h]
+  \begin{subfigure}{.2\textwidth}
+    \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_scale_0.003_G.eps}
+    \caption{No encoding}
+    \label{MSE256Scale}
+  \end{subfigure}\hfill
+  \begin{subfigure}{.2\textwidth}
+    \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_positional_256_0.003_m0_G.eps}
+    \caption{PE}
+    \label{MSE256PE}
+  \end{subfigure}\hfil
+  \begin{subfigure}{.2\textwidth}
+    \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_fourier_256_0.01_G.eps}
+    \caption{FFM}
+    \label{MSE256FFM}
+  \end{subfigure}\hfil
+  \begin{subfigure}{.2\textwidth}
+    \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_tent_256_0.007_m64_G.eps}
+    \caption{TE}
+    \label{MSE256TE}
+  \end{subfigure}\hfil
+  \begin{subfigure}{.2\textwidth}
+    \includegraphics[width=\textwidth]{Bilder/MSE_Bilder/cropped/kernel10_magnitude_256_0.007_m0.0001_G.eps}
+    \caption{ME}
+    \label{MSE256ME}
+  \end{subfigure}\hfill
+  \caption{Local MSE-Loss for $d=256$, green channel, brighter colors represent larger values.}
+  \label{MSE256}
+\end{figure}
+
+In the loss map for PE with $d=256$ the giraffe stands out. This can be attributed to the encoding losing resemblance in the neighborhood of each pixel. This can be interpreted as the encodings of neighboring coordinates lacking similarity which impedes generalization. Training pixels are unaffected by this problem causing the model to overfit.
+
+\end{document}

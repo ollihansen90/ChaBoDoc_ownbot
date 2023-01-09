@@ -1,0 +1,36 @@
+% !TEX root = ../svrhm.tex
+\section{Population coding}
+%Die 4 Varianten benennen, Formeln angeben, Parameter definieren (Sigma, M) (+Referenzen)
+%\textit{Anmerkung: Für eine Verallgemeinerung auf Inputgroesse $d$ muessen hier nochmal die Formeln angepasst werden, da wir in der Bachelorarbeit mit $d=2$ gearbeitet haben.}
+%This paper looks at four different methods of population coding in order to compare them. These four methods are described below. 
+Across all encodings the input values are assumed to be in the range -1 to 1. 
+The resulting encoded vector is a concatenation of the encoded components. The visualizations can be found in the appendix \ref{subsecPlots}.
+
+\subsection{Positional Encoding}
+For a multimodal example we explore Positional Encoding (PE) as described in \cite{mildenhall2020nerf} uses a combination of sine and cosine functions with exponential frequencies to encode the given input values:
+\begin{align*}
+    f(x) = [sin(2^0\pi x),\ldots,sin(2^{L-1}\pi x),cos(2^0\pi x),\ldots,cos(2^{L-1}\pi x)]
+\end{align*}
+for each input scalar $x$. 
+
+\subsection{Fourier Feature Mapping}
+Fourier Feature Mapping (FFM) was introduced in \cite{tancik2020fourier}. In contrast to PE, the components are not encoded individually but instead the input vector is transformed via random linear operation:
+\begin{align*}
+    f(\textbf{p}) = [a_1 sin(2\pi\textbf{b}_1^T\textbf{p}),\ldots,a_L sin(2\pi\textbf{b}_L^T\textbf{p}),a_1 cos(2\pi\textbf{b}_1^T\textbf{p}),\ldots,a_L cos(2\pi \textbf{b}_L^T\textbf{p})].
+\end{align*}
+
+In this paper we use $a_k=1$ for all $k$ in order to get a direct comparison between FFM and other encoding methods. The random vectors $\textbf{b}_i$ are drawn independently from a standard normal distribution.
+
+\subsection{Tent Encoding}
+For a unimodal example we explore Tent Encoding (TE) by the authors of \cite{jahrens2020solving} is based on the tent mapping.
+    \[t(x) = \begin{cases} x+1 & x \in [-1,0] \\ -x+1 & x \in (0,1]\\ 0 & \text{else} \end{cases}\]
+In addition to translations $t(\cdot-a)$, TE uses different slopes $m$ that can be adjusted:
+\begin{align*}
+    &f(x) =\left[t\left(m\cdot(x-\mu_0)\right), t\left(m\cdot(x-\mu_1)\right),\ldots,t\left(m\cdot(x-\mu_{L-1})\right)\right]\\&\text{with }\mu_i=\frac{2\cdot i}{L-1}-1\quad\forall\ i=0,\ldots,L-1.
+\end{align*}
+
+\subsection{Magnitude Encoding}
+Magnitude Encoding (ME) as described in \cite{jahrens2020solving} uses Gaussian bell curves $g(x)=\exp(-x^2/(2\sigma^2))$. Each input component is encoded via
+\begin{align*}
+    &f(x) =\left[g\left(x-\mu_0\right), g\left(x-\mu_1\right),\ldots,g\left(x-\mu_{L-1}\right)\right]\\&\text{with }\mu_i=\frac{2\cdot i}{L-1}-1\quad\forall\ i=0,\ldots,L-1.
+\end{align*}

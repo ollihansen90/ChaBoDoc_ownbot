@@ -1,0 +1,19 @@
+% !TEX root = ../svrhm.tex
+\section{Introduction}
+
+Recently, multiple publications have shown that it is beneficial for neural networks to encode continuous inputs
+as vector encodings \cite{mildenhall2020nerf}\cite{jahrens2020solving}, also known as population coding. 
+For that, the scalar components of the network input would be represented as vectors such that the value of a scalar will not be defined by the extend of a single stimulus, but by the pattern in the vector.
+
+In nature this principle can be observed in the activation patterns that represent joint position or eye position as well as an organism's location in space, i.e. grid cells as described by \cite{haftin2005gridcells}. For different purposes different encoding schemes are used. These can be distinguished by the neurons employing unimodal or multimodal activation characteristics. In this paper we explore examples for both types of encoding schemes. 
+
+For a closed set of discrete values, this has been done for a while in the form of learned embeddings, e.g. in language models with a fixed dictionary \cite{devlin2019bert}.
+For an open set of discrete values, a similar concept can be found in position encodings \cite{vaswani2017transformer}. 
+However, position encodings are usually only applied to the positional information of elements in a sequence or tensor, rather than to encode the scalar values of the input sample.
+
+The benefit of applying population coding to neural network inputs has been demonstrated not only for information rich, independent scalars like cartesian coordinates \cite{mildenhall2020nerf}, 
+but also highly correlated scalars like pixel values in images \cite{jahrens2020solving}. 
+A more thorough analysis of existing approaches would therefore aid in determining the usefulness and potential pitfalls of population coding in current neural networks.
+
+We compare four population coding schemes and examine their utility in a regression setting. 
+We show that population coding can drastically improve a model's performance in a way that cannot be explained by the increased network depth or number of parameters.

@@ -1,0 +1,12 @@
+% !TEX root = ../svrhm.tex
+\section{Results}
+Among the tested encodings TE and ME show the best results. For higher population sizes, PE achieves great results on the training set, but fails to generalize as seen in figure \ref{PE256}. TE and ME perform similarly to PE on the training set but exhibit better generalization.
+
+\subsection*{Failure cases}
+When using TE, it must be ensured that the tent functions have sufficient width. 
+The slope $m$ must not exceed $d/4$, i.e. the tent width is at least $8/d$. 
+Otherwise, mirroring artifacts occur as seen in figure \ref{TEartefact} as the neural network fails to distinguish between different input scalars that have similar repesentations. The same phenomenon happens with ME when setting $\sigma$ too small. 
+When working with PE, large population sizes can lead to bad generalization. A more detailed analysis is given in appendix \ref{LocalMSE}. 
+%PE mit hoher Dimension
+%Spiegelartefakte bei Tent-Encoding
+%Artefakte bei ME mit zu kleinem Sigma

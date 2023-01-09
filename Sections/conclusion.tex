@@ -1,0 +1,11 @@
+\section{Conclusion}
+
+Using population coding has proven to vastly increase the capability to learn high frequency dependencies between input and output of a neural network. Across encoding schemes, a correlation between population size and resolution of the learned function can be observed, with diminishing returns for large populations. 
+
+In order to avoid overfitting, small differences in input values must not lead to drastic changes in the encoded representation. This is demonstrated to be a problem for a class of commonly used position encoding methods, with other encoding schemes being less susceptible to this issue. 
+
+Overall, Magnitude Encoding and Tent Encoding show the best results among the compared population coding schemes. 
+
+An interesting prospect is the use of population coding to explicitly encode features inside a neural network. While a neural network can in theory learn these population coded features, this work is evidence that in practice it does not do so, at least not for the input layer.
+
+Potential applications include late fusion models, as well as sequence models with low dimensional sequence samples, like audio waveforms and other time series data. In these scenarios using population coding on the input might drastically improve model performances.

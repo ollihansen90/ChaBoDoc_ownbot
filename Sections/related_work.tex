@@ -1,0 +1,15 @@
+% !TEX root = ../svrhm.tex
+\section{Related work}
+Population coding was successfully used in several publications to increase a network's performance. 
+The authors of \cite{mildenhall2020nerf} used Positional Encoding on a camera pose vector, a five dimensional input vector $(x,y,z,\theta, \phi)$ with spacial coordinates $x$, $y$ and $z$ as well as orientation $\theta$ and $\phi$ to learn the corresponding RGB-values on the line of sight.
+Encoding the low-dimensional inputs was essential to achieve good results on their regression problem. 
+
+In \cite{jahrens2020solving} another population coding scheme called Magnitude Encoding was employed to get a new representation of the individual intensity values of grey scale images. 
+The model processes multiple images per sample and uses late fusion, so the improved performance may be attributed to improved information retention.
+The input encoding turned out to be crucial to solve certain tasks pertaining to color. 
+
+% In a work focused on optimizing the encoding of coordinates Fourier Feature Mapping \cite{tancik2020fourier} was introduced. 
+% The authors have shown the high impact of their encoding scheme on the capacity of MLPs to learn high frequency dependencies between input and output. 
+The authors of \cite{tancik2020fourier} introduced Fourier Feature Mapping and demonstated the high impact of their encoding scheme on the capacity of MLPs to learn high frequency dependencies between input and output. 
+
+% Each of these approaches lead to huge improvements in the networks' comprehension of (scalar) data.
